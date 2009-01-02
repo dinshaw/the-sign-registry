@@ -1,0 +1,319 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>EC & DP - A simple PHP solution</title>
+</head>
+
+<body>
+
+<table border="1" width="100%" id="table1" style="border-style: dashed; border-width: 0; font-family: lucida-sans, geneva, arial;">
+	<tr>
+		<td>
+		<p align="center">Simple ExpressCheckout and DirectPayment&nbsp; v0.2 
+		(it's still a little rough)</td>
+	</tr>
+	<tr>
+		<td>&nbsp;<br /><font size="2">Finally! A non Pear-based solution for 
+		ExpressCheckout and DirectPayment PayPal APIs. The PayPal PHP SDK can be 
+		complicated to install and often more complex than necessary. Although 
+		the flexibility of Pear and a full Object-Oriented programming style has 
+		many benefits beyond this solution, this is a simple way to get some 
+		functionality going fairly quickly.</font><p><font size="2"><b>Benefits:</b><br />If 
+		you need a much simpler solution or need to rapidly test features 
+		without installing Pear or don't need all of the API functionality at 
+		the present, you can deliver a workable solution with this package. All 
+		of this code is open-source (MIT-style) with no limitation or 
+		restrictions <i>with exception to the 
+		XML2Array.php file in the includes folder (Artistic license, see file 
+		for additional details)</i>.</font><p>
+		<font size="2"><b>Downside:</b><br />
+		
+		The downside to this package is that you lose some flexibility. At 
+		present, only a bare minimum can be passed to PayPal and not all 
+		variables can be passed through. There is no error logging. You will 
+		need to check for errors and record them by some method of your own 
+		choosing. This should evolve with time. This package uses XML 
+		&quot;templates&quot; to build the request. Depending on the age of the version of 
+		this package, some of the XML could possibly become out of date. 
+		There is backward compatibility that PayPal provides so this should be a 
+		non-issue.</font><p>
+		<font size="2"><b>Usage:</b><br />
+		This package is pretty simple to use. For API calls that only require a single field, you pass it to an
+		
+		
+		object along with the type of call you are executing. In cases where you 
+		need to pass multiple values, you create an array and set 'key' names 
+		and &quot;values&quot; to correspond with those found in the XML templates. If you 
+		look at the source code of &quot;index.php&quot; you will find four fully 
+		functional and tested API calls. If you need to add more variables that 
+		are not in the XML templates, you will need to hand code the additional, 
+		properly formatted, XML into the template and use the array placeholders 
+		( <font color="#0000FF">{$values[keyname]} </font>) where variables should be placed.</font><p>
+		<font size="2"><b>Configuration:</b><br />Configuration is fairly 
+		simple. </font>
+		<ol>
+			<li><font size="2">Download the package and open it.</font></li>
+			<li><font size="2">Open PayPal.class.php in your favorite text 
+			editor</font></li>
+			<li><font size="2">Uncomment the section for your chosen testing 
+			environment. Sandbox is the default settings used.</font></li>
+			<li><font size="2">Edit the values of the variables found in the 
+			appropriate section to match you own values.</font></li>
+			<li><font size="2">Save the file.</font></li>
+			<li><font size="2">Upload all of the files to your webserver. </font>
+			</li>
+			<li><font size="2">Download your Sandbox PayPal account API 
+			certificate and upload it to a folder or directory above your web 
+			root if possible. Do the same thing for your Live PayPal account API 
+			certificate. Make sure you upload the certificates to the directory 
+			you specified in Step 4!</font></li>
+		</ol>
+		<p><font size="2">You can edit index.php to test the various API calls. 
+		Each call will dump an array of the results to the screen. This will 
+		allow you to see how the results are returned. </font></p>
+		<p><font size="2">To access the results, you need to walk through the 
+		array and extract your values. For example, here is the code from the 
+		index page:</font></p>
+		<blockquote>
+			<p><font size="2" color="#0000FF">$vals = array<br>
+			(<br>
+			&quot;Return&quot; =&gt; 'http://mysite.com/successful/url/', <br>
+			&quot;CancelReturn&quot; =&gt; 'http://mysite.com/cancel/url/',<br>
+			&quot;CurrencyID&quot; =&gt; 'USD',<br>
+			&quot;OrderTotal&quot; =&gt; '5.00'<br>
+			);<br>
+			<br>
+			$paypal =&amp; new PayPal();<br>
+			$paypal-&gt;setCall('SetExpressCheckout', $vals);<br>
+			$result = $paypal-&gt;getResult();<br>
+			<br>
+			</font><font size="2" color="#808080">#&nbsp; $result is now an 
+			array.</font></p>
+		</blockquote>
+		<p><font size="2">A breakdown of the code above:</font></p>
+		<blockquote>
+			<p><font size="2">The four required fields in a SetExpressCheckout 
+			call are a return URL to send your buyer back to your site and a 
+			cancel URL to send your buyer if they cancel out of the transaction 
+			at the PayPal site, the currency type you are processing and the 
+			total value of the order. You pack these four variables into an array. (You 
+			can pack more but you will have to edit the templates)</font></p>
+			<p><font size="2">Next, you create a new PayPal object. With the new 
+			object, you set the call, passing the call name and the values as 
+			arguments to the method. Next, you need to get the results of the 
+			API call.&nbsp; As you can see in the&nbsp; example, I made a 
+			$result variable. The values you need are stored in an array. To 
+			access the values, you need to work the array: <font color="#0000FF">
+			$ack = $result[SetExpressCheckoutResponse][Ack];</font>. </font></p>
+		</blockquote>
+		<p><font size="2">The snippets in &quot;index.php&quot; also allow you to see all of the 
+		variables that you need to define in an array. The DoDirectPayment 
+		requires the most number of variables in the array. These are marked as 
+		&quot; *Required &quot;&nbsp; if you must pass some data to it. In a case where 
+		you do not need shipping data to be passed, you must still populate the 
+		fields. In this case, pass an exact copy of the billing address.</font><p>
+		<font size="2">In theory, you should be able to run a complete set of 
+		API calls using just the examples. They are commented in such a way that 
+		you only need to put a # character in front of the comment block for the 
+		call you wish to test. i.e.:</font><blockquote>
+			<p><font size="2" color="#0000FF">/**************</font></p>
+			<p><font size="2">Becomes</font></p>
+			<p><font size="2" color="#0000FF">#/************</font></p>
+		</blockquote>
+		<p><font size="2">Each sample is designed to dump the returned array to 
+		the screen so that you can see the array keys and values as well as the 
+		order in which the array is designed. One last note: The returned array 
+		is a stripped version of the response. The SOAP headers from the 
+		response have been trimmed away so you only have to work with the SOAP 
+		Body (the payload).</font><p><b><font size="2">Extending the 
+		functionality</font></b><p><font size="2">You can easily extend the 
+		functionality of this SDK by simply&nbsp; creating a new XML template. 
+		The SOAP headers and footers are automatically created for you. You must 
+		build the SOAP body. All values must be passed into the class in the 
+		setCall() method. The first argument to setCall is the name of the API 
+		call while the second argument is the values. You can pass a string or 
+		array through the value argument. In the template you create, you can 
+		access the values passed by using $this-&gt;_values. You can look at the 
+		various templates in this package as a starting point. Each call should 
+		be put into a separate folder where the folder name matches the call 
+		name. This was done with the idea that you can include or build out 
+		specific functionality for each call within it's own folder. Also, very 
+		important to note, when building your SOAP Body file, you must begin the 
+		body with:</font><blockquote>
+			<p><font size="2" color="#0000FF">$SOAPrequest .= &lt;&lt;&lt;End_of_quote</font></blockquote>
+		<p><font size="2">and then end the xml with</font><blockquote>
+			<p><font size="2" color="#0000FF">End_of_quote;</font></blockquote>
+		<p><font size="2">Please note the use of the &quot;<b><font color="#0000FF">.=</font></b>&quot; 
+		since the $SOAPrequest variable is being appended to an existing 
+		variable.</font><p><b><font size="2">Common Errors and Questions:</font></b><p>
+		<font size="2">cURL SSL Error 35 (OpenSSL/cURL error) </font>
+		<blockquote>
+			<ul>
+				<li><font size="2">make sure your username and password are set 
+				correctly. You <b>can not </b>use a Sandbox cert on the Live 
+				PayPal site or a 
+				Live cert on the Sandbox site.</font></li>
+				</ul>
+			</blockquote>
+			<p><font size="2">Variables were passed to the template but they 
+			keep showing up with no values in the request</font><blockquote>
+				<ul>
+					<li><font size="2">make sure you are accessing them from the 
+					class properly - your values are stored in
+					<font color="#0000FF">$this-&gt;_values</font> from the class</font></li>
+					<li><font size="2">If you are passing an array and want to 
+					use the values by key name, you need to remember to use the 
+					&quot;placeholder&quot;:</font> <font size ="2" color="#0000FF">{$this-&gt;_values[keyname]} </font>
+					<font size="2">in the template where you want the code to appear.</font></li>
+					</ul>
+					</blockquote>
+					<p><font size="2">You can't see the full result or you log 
+					the result to a file but it is missing pieces (header, 
+					footer, etc)</font></p>
+		<blockquote>
+			<ul>
+				<li><font size="2">you can access the exact string sent to and 
+				returned from PayPal by accessing the appropriate class 
+				variables. If I have executed a call, I can access the strings 
+				by using:</font><ul>
+					<li><font size="2"><font color="#0000FF">$paypal-&gt;_request</font> 
+					- container for the request;</font></li>
+					<li><font size="2"><font color="#0000FF">$paypal-&gt;_result
+					</font>- container for the returned xml string.</font></li>
+				</ul>
+				</li>
+			</ul>
+		</blockquote>
+		<p><font size="2">How do I implement logging into this?</font></p>
+		<blockquote>
+			<ul>
+				<li><font size="2">logging can be added in a variety of ways. My 
+				recommendation is to add your logging in the PayPal class. Look 
+				for the comment in PayPal.class.php and add in your preferred 
+				method under the commented line: &quot;# Log the results&quot;;</font></li>
+			</ul>
+		</blockquote>
+		<p><font size="2">How do I find how what the error messages are?</font></p>
+		<blockquote>
+			<ul>
+				<li><font size="2">You can access Error messages returned by the 
+				API by using code similar to:</font>
+				<p>
+				<font size="2" color="#0000FF">
+				if ($result[Ack] == &quot;Failure&quot;) # check the Ack for Failure<br />
+				
+				{<br />
+				
+				&nbsp; $errors = $paypal-&gt;getErrors();<br />
+				
+				&nbsp; $sm = $errors[ShortMessage];<br />
+				&nbsp; $lm = $errors[LongMessage];<br />
+				&nbsp; $ec = $errors[ErrorCode];<br />
+				}
+				</p>
+				
+				</font>
+				<font size="2">
+				The error messages return useful information. You should check 
+				the data entered against the error message and attempt to 
+				troubleshoot the code this way. It would be wise to note the 
+				correlation ID which is on the same level as as [Ack] in the 
+				response: $result[CorrelationID] . If you use a logging 
+				mechanism, please be sure to log the correlation ID.</font><p>
+				<font size="2">The getErrors() method is a redundant method. The 
+				idea is to limit the number of keys you have to dig into to pull 
+				results out of and presents a consistent interface for accessing 
+				error messages.</font></li>
+			</ul>
+		</blockquote>
+		<p><font size="2">How does this class work?</font><blockquote>
+			<p>
+			<img border="0" src="flow.GIF" width="545" height="224"><br />
+			<font size="2">
+			Your script creates a new object. You pass the name of the call and 
+			the values to the object. The class then goes into a directory and 
+			finds the file where both the directory and file match the name of 
+			the API call being made. The file contains an XML-based template of 
+			the SOAP body. Your values are put into the template and then joined 
+			with the SOAP header and footer. This single string of data is now 
+			passed to PayPal with your API certificate using cURL. When the 
+			response comes back, the results are parsed down into an array which 
+			can then be accessed from your script. If the result of the API call 
+			is a failure, the class will go one step further and give you back 
+			the errors in a custom method called getErrors() which breaks down 
+			the error messages into a simple interface. An example of this code 
+			in action would be similar to:</font><blockquote>
+				<p><font size="2" color="#0000FF">&lt;?php
+				# Example of SetExpressCheckout:<br>
+				<br>
+				# require the class file<br>
+				require_once('./path/to/paypal.class.php');<br>
+				<br>
+				# get the order total and currency type<br>
+				# get the return and cancel_return URLs<br>
+				# put the values into an array:<br>
+				<br>
+				$values = array<br>
+				(<br>
+				&quot;Return&quot; =&gt; 'http://mysite.com/successful/url/', <br>
+				&quot;CancelReturn&quot; =&gt; 'http://mysite.com/cancel/url/',<br>
+				&quot;CurrencyID&quot; =&gt; &quot;USD&quot;,<br>
+				&quot;OrderTotal&quot; =&gt; &quot;5.00&quot;<br>
+				)<br>
+				<br>
+				# build an API call<br>
+				<br>
+				&nbsp;
+				# create the object<br>
+				$paypal = new PayPal();<br>
+				&nbsp;
+				# set the API call<br>
+				$paypal-&gt;setCall('SetExpressCheckout', $values);<br>
+				&nbsp;
+				# get the results:<br>
+				$results = $paypal-&gt;getResult();<br>
+				<br>
+				if($results[Ack] == 'Failure')<br>
+				{<br>
+				&nbsp;
+				# If the API call failed, do something<br>
+				&nbsp;
+				$errors = $paypal-&gt;getErrors();<br>
+				&nbsp;
+				$sm = $errors[ShortMessage];<br>
+				&nbsp;
+				$lm = $errors[LongMessage];<br>
+				&nbsp;
+				$ec = $errors[ErrorCode];<br />
+				&nbsp;
+				# Notice 
+				the Correlation ID references the original $results variable and 
+				not the $errors variable!<br>
+				&nbsp;
+				$cid = $results[CorrelationID];<br>
+				}<br>
+				else<br>
+				{<br>
+				&nbsp;
+				# if the API call was a success -<br>
+				&nbsp;&nbsp;
+				# cache the cart data *with the token* to link the cart to the 
+				user when the user returns to your site!<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				# then redirect to PayPal<br>
+				&nbsp; header(&quot;Location:<a href="https://sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=&quot;.$results[Token]">https://sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&amp;token=&quot;.$results[Token]</a>);<br>
+				&nbsp;
+				# the user is now gone.<br>
+				}<br>
+				<br>
+				?&gt;</font></blockquote>
+		</blockquote>
+		</td>
+	</tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+<option value="">yyyy</option><%php%>//get  all years of people from 21 to 110for($i=21;$i<100;$i++){	$lastYearTimeStamp = getdate(strtotime("-$i year"));	echo "<option value=\"$lastYearTimeStamp[year]\">$lastYearTimeStamp[year]</option>";}<%/php%>

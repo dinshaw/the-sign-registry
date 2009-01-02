@@ -1,0 +1,1 @@
+<!-- <%$smarty.template%> --><%include file="admin/admin_header.tpl" pageTitle="Red Rock West Saloon - NYC"%><div id="centercontent"><div id="adminTitle" class="title"><h1>Adminn Area</h1></div><h2>SUCCESS!</h2><h3>You are logged in.</h3></div><%include file="admin/admin_footer.tpl" currPage=$smarty.template%>

@@ -1,0 +1,1 @@
+<!-- close content div --></div><div id="footer">			<div id="inner">			<p>design &amp; development by <a href="http://www.dinshawdesign.com" target="_blank">DINSHAW</a></p></div><!-- close container div --></div></body></html>

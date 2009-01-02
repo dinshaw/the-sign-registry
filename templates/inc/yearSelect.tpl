@@ -1,0 +1,1 @@
+<option value="">year</option><%section loop=$yearLoop name=years%>  <option value="<%$yearLoop[years]%>" <%if $yearLoop[years] eq "$value" %>selected<%/if%> ><%$yearLoop[years]%></option><%/section%>

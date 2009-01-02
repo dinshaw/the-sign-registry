@@ -1,0 +1,13 @@
+<?php
+//PREVIOUSLY REGISTERED RECIPIENTS
+include 'scripts/reg/get_recipients.php';
+
+//SIGNS REGISTERED TO YOU
+	
+	//SUBMITED VALIDATION ATTEMPTS
+
+
+
+
+
+?>

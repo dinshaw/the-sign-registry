@@ -1,0 +1,94 @@
+body#the-sign-registry{margin:0;padding:0;background:url(../../templates/img/header/bgTile.jpg);font-family:Helvetica, verdana, arial, sans-serif; font-size:13px;color:#441E61;}
+
+a{color:#441E61;}
+a:visited{}
+
+form{margin:0;padding:0; border:0;}
+img {border:0;}
+img.border{border:1px solid #441E61;}
+p,td,th,fieldset,legend{letter-spacing:0.01em;word-spacing:0.05em;line-height:17px; }
+p{margin:0 0 20px 0;}
+p.m0{margin:0;}
+.small{font-size:11px; margin:0;}
+p.noindent, #splash p.noindent{text-indent:0;}
+
+.red{color:#900;font-weight:bold;}
+.mb20{margin-bottom:20px;}
+
+
+h1,h2{ font-family: "Times New Roman", Times, serif; margin:0; padding:0;}
+h1{height:23px; font-size:13px; background:url(../../templates/img/splash/underline.jpg) 40px 22px no-repeat; margin-bottom:10px;}
+h1.rgt{background:url(../../templates/img/splash/underline.jpg) -150px 22px no-repeat; text-align:right;}
+h1 span{font-size:22px; font-style:italic;}
+h2{font-size:15px; font-style:italic; margin:0 0 2px 0; padding:0; border:1px solid #441E61;border-width:0 0 1px 0;}
+h3{font-weight:100; margin:2px 0 20px 0;padding:0; font-size:13px;}
+
+input,select,textarea{font-size:12px; color:#441E61; border:1px solid #A090AD;}
+
+input.text,input.button,select.text{width:150px; margin:3px 15px 3px 3px;}
+input.button{cursor:pointer; background-color:#EBEBEB;}
+input.num{width:20px; margin:3px 15px 3px 3px;}
+input.dollar{width:60px; margin:3px 15px 3px 3px;}
+select.date{margin:3px;}
+textarea{width:100%;height:200px; margin-bottom:10px;}
+.lr input{margin-right:0;}
+
+blockquote{background:#FAE6F3;border:1px solid #441E61; margin:20px 0; padding:5px;}
+blockquote p{margin:0;}
+
+dt{font-weight:bold; margin:0 0 3px 0;}
+dd{margin-bottom:10px;}
+
+#header{height:110px; background:url(../../templates/img/header/header.gif) top right no-repeat;}
+#header img{margin:20px 0 0 130px;}
+
+#nav ul{margin:0;padding:0;list-style:none;}
+#nav ul li{text-align:right; padding:5px;}
+#nav ul li a{display:block; text-decoration:none; font-size:13px;}
+#nav ul li a:hover{text-decoration:underline;}
+
+#login{margin:0 0 0 130px; padding:3px 10px;border:1px solid #A090AD; border-width:1px 0 0 1px; background-color:#F7F5CD; font-size:11px; height:2.5em;}
+#login input.text,#login input.button{width:100px;}
+#login p{font-size:13px; padding:0; margin:0; height:1em;}
+
+#content{margin:0 0 0 130px; padding:10px; border:1px solid #A090AD; border-width:1px 0 1px 1px;background:#fff url(../../templates/img/header/faces.jpg) 50% 20px no-repeat;}
+
+#splash{width:580px;}
+#splash{margin:0;padding:0;}
+#splash p,p.indent{text-indent:2em;}
+#splash blockquote{margin:50px 0 0 0;font-size:11px; line-height:15px;}
+#footer{margin:0 0 0 130px;padding:5px;font-size:10px;}
+#footer #inner{width:300px;margin:auto;}
+
+#reg{margin:0; padding:0 0 20px 0;}
+#reg #tc{margin:0 0 20px 0; padding:0;}
+
+/* user registration area */
+#reg legend{font-size:15px;}
+#reg fieldset{border:1px solid #441E61; margin:0 0 20px 0;}
+#reg p.footNote{margin:-15px 0 0 0;}
+table.return{border-collapse:collapse; margin:0 0 20px 0; width:550px;}
+.return td, th{ padding:5px; text-align:center; font-size:11px;}
+.return th{font-weight:bold;border:1px solid #441E61;}
+.return tr.title{background-color:#F7F5CD;}
+.return tr.white{background-color:#fff;}
+.return tr.grey{background-color:#ccc;}
+
+#recipients{margin-top:20px; width:100%;}
+#registrants{margin-top:0;}
+table.form th{text-align:right;}
+
+ul#reg_info, ul#contact{ margin:0 20px 20px 0; padding:0; list-style:none;}
+ul#reg_info li{padding:2px 0 0 15px;}
+ul#reg_info li span{font-weight:bold;}
+ul#reg_info li.title{font-weight:bold; padding:0;}
+
+ul#contact{margin:20px;}
+ul#contact li{text-align:center; padding:5px;}
+ul#contact li.bold{font-weight:bold;}
+
+#popupHeader{margin:10px;}
+#tc{padding:10px;}
+
+td.subTotal {text-align:right;}
+tr.total td{font-weight:bold;}

@@ -1,0 +1,1 @@
+<%include file='admin/admin_header.tpl' title='Admin Page'%><h2>SUCCESS!</h2><h3>You are logged in.</h3><hr><hr><%include file='admin/admin_footer.tpl'%>

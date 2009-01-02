@@ -1,0 +1,1 @@
+<!-- <%$smarty.template%> --><%include file="header.tpl" page_title="The Sign Registry" currPage=$smarty.template%><div id="reg"><h2 class="lr">VALIDATION COMPLETE</h2><%if $msg %><p><%$msg|nl2br%></p><%/if%></div> <%include file="footer.tpl"%>
